@@ -27,7 +27,7 @@ export const Footer: React.FC<Props> = ({ currentPortName, onApplied }) => {
   };
 
   return (
-    <div className="px-5 py-3 border-t border-border shrink-0">
+    <div className="px-5 pt-3 pb-4 border-t border-border shrink-0">
       <div className="flex items-center gap-2">
         <span className="text-[10px] text-muted uppercase tracking-widest shrink-0">
           MIDI Port

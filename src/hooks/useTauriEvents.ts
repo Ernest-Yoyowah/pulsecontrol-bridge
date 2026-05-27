@@ -19,11 +19,7 @@ export function useTauriEvents() {
         }),
       );
 
-      unlisten.push(
-        await listen("client-connected", () => {
-          // client info arrives via hello-received; just clear stale info here
-        }),
-      );
+      unlisten.push(await listen("client-connected", () => {}));
 
       unlisten.push(
         await listen("client-disconnected", () => {

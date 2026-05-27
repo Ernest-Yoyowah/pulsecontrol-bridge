@@ -1,20 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { useServerStore, ServerInfo } from "./store/useServerStore";
 import { useTauriEvents } from "./hooks/useTauriEvents";
 import { Header } from "./components/Header";
-import { QrPanel } from "./components/QrPanel";
-import { StatusCard } from "./components/StatusCard";
-import { ActivityLog } from "./components/ActivityLog";
-import { Footer } from "./components/Footer";
+import { NavBar, Page } from "./components/NavBar";
+import { DashboardPage } from "./pages/DashboardPage";
+import { ActivityPage } from "./pages/ActivityPage";
+import { SettingsPage } from "./pages/SettingsPage";
+import { AboutPage } from "./pages/AboutPage";
 
 function App() {
+  const [page, setPage] = useState<Page>("dashboard");
   const { serverInfo, activityLog, clientInfo, setServerInfo, setActivityLog } =
     useServerStore();
 
   useTauriEvents();
 
-  // Poll server info every 2 s
   useEffect(() => {
     const poll = async () => {
       try {
@@ -30,12 +31,11 @@ function App() {
     return () => clearInterval(id);
   }, [setServerInfo]);
 
-  // Load initial activity log once
   useEffect(() => {
     invoke<typeof activityLog>("get_activity_log")
       .then(setActivityLog)
       .catch(() => {});
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const handlePortApplied = (name: string) => {
     setServerInfo({ ...serverInfo, midi_port_name: name });
@@ -48,18 +48,21 @@ function App() {
         clientConnected={clientInfo !== null}
       />
 
-      <QrPanel wsUrl={serverInfo.ws_url} />
+      <main className="flex-1 min-h-0 overflow-hidden">
+        {page === "dashboard" && (
+          <DashboardPage serverInfo={serverInfo} clientInfo={clientInfo} />
+        )}
+        {page === "activity" && <ActivityPage entries={activityLog} />}
+        {page === "settings" && (
+          <SettingsPage
+            currentPortName={serverInfo.midi_port_name}
+            onApplied={handlePortApplied}
+          />
+        )}
+        {page === "about" && <AboutPage />}
+      </main>
 
-      <StatusCard serverInfo={serverInfo} clientInfo={clientInfo} />
-
-      <div className="h-3 shrink-0" />
-
-      <ActivityLog entries={activityLog} />
-
-      <Footer
-        currentPortName={serverInfo.midi_port_name}
-        onApplied={handlePortApplied}
-      />
+      <NavBar current={page} onChange={setPage} />
     </div>
   );
 }

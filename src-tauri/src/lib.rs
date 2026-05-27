@@ -6,8 +6,6 @@ mod state;
 use std::sync::{Arc, Mutex};
 use state::{ActivityEntry, AppState, ServerInfo};
 
-// ─── Tauri commands ──────────────────────────────────────────────────────────
-
 #[tauri::command]
 fn get_server_info(state: tauri::State<'_, Arc<Mutex<AppState>>>) -> ServerInfo {
     let s = state.lock().unwrap();
@@ -36,27 +34,21 @@ fn set_midi_port(
     state: tauri::State<'_, Arc<Mutex<AppState>>>,
 ) -> Result<(), String> {
     let mut s = state.lock().unwrap();
-    // Drop the old connection first
     s.midi_out = None;
-    // Create new virtual port with the requested name
     let conn = midi::create_virtual_port(&name)?;
     s.midi_out = Some(conn);
     s.midi_port_name = name;
     Ok(())
 }
 
-// ─── Entry point ─────────────────────────────────────────────────────────────
-
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let shared_state = Arc::new(Mutex::new(AppState::new()));
 
-    // Resolve local LAN IP
     if let Ok(ip) = local_ip_address::local_ip() {
         shared_state.lock().unwrap().local_ip = ip.to_string();
     }
 
-    // Open CoreMIDI virtual output port
     {
         let mut s = shared_state.lock().unwrap();
         match midi::create_virtual_port("PulseControl") {
@@ -80,15 +72,12 @@ pub fn run() {
                 s.local_ip.clone()
             };
 
-            // Mark server as running
             ws_state.lock().unwrap().server_status = "running".to_string();
 
-            // Register mDNS service (non-fatal if it fails)
             if let Err(e) = discovery::register_mdns(&local_ip) {
                 eprintln!("mDNS registration error: {}", e);
             }
 
-            // Spawn the axum WebSocket server on the tokio runtime
             let state_for_ws = ws_state.clone();
             tauri::async_runtime::spawn(async move {
                 server::start(state_for_ws, app_handle).await;

@@ -1,8 +1,6 @@
 use mdns_sd::{ServiceDaemon, ServiceInfo};
 use std::collections::HashMap;
 
-/// Registers a _pulsecontrol._tcp.local. mDNS service on port 8765.
-/// The returned daemon must be kept alive for the service to remain advertised.
 pub fn register_mdns(local_ip: &str) -> Result<ServiceDaemon, String> {
     let mdns = ServiceDaemon::new().map_err(|e| e.to_string())?;
 

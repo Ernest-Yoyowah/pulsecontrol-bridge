@@ -103,11 +103,7 @@ async fn handle_text(text: &str, state: &WsState, socket: &mut WebSocket) {
             }
 
             // Respond with ACK
-            let ack = json!({
-                "type": "ack",
-                "server": "pulsecontrol-bridge",
-                "version": "1.0.0"
-            });
+            let ack = json!({ "type": "ack", "server": "pulsecontrol-bridge", "version": "1.0.0" });
             let _ = socket.send(Message::Text(ack.to_string().into())).await;
 
             let _ = state.app_handle.emit(
@@ -187,9 +183,7 @@ async fn handle_text(text: &str, state: &WsState, socket: &mut WebSocket) {
             emit_last_activity(state);
         }
 
-        _ => {
-            // Unknown message type — ignore
-        }
+        _ => {}
     }
 }
 

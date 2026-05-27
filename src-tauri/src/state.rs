@@ -50,7 +50,6 @@ impl AppState {
             message_type: message_type.to_string(),
             detail: detail.to_string(),
         });
-        // Keep only the last 50 entries
         if self.activity_log.len() > 50 {
             let drain = self.activity_log.len() - 50;
             self.activity_log.drain(0..drain);
