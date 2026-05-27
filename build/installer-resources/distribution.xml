@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="2">
+    <title>PulseControl Bridge</title>
+    <background file="welcome.html" mime-type="text/html" alignment="left" scaling="proportional"/>
+    <welcome file="welcome.html" mime-type="text/html"/>
+    <conclusion file="conclusion.html" mime-type="text/html"/>
+    <options customize="never" require-scripts="false" rootVolumeOnly="true"/>
+    <choices-outline>
+        <line choice="default"/>
+    </choices-outline>
+    <choice id="default" title="PulseControl Bridge" description="Installs PulseControl Bridge to /Applications.">
+        <pkg-ref id="studio.ernestkeyz.pulsecontrol-bridge"/>
+    </choice>
+    <pkg-ref id="studio.ernestkeyz.pulsecontrol-bridge" version="1.0.0" onConclusion="none">pulsecontrol-bridge.pkg</pkg-ref>
+</installer-gui-script>

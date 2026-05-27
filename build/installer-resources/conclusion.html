@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="light dark" />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --surface: #f4f4f5;
+        --border: #e4e4e7;
+        --text: #18181b;
+        --muted: #71717a;
+        --accent: #0284c7;
+        --brand: #0284c7;
+        --step-text: #18181b;
+        --success: #16a34a;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #080808;
+          --surface: #0f0f0f;
+          --border: #2a2a2a;
+          --text: #f5f5f5;
+          --muted: #9e9e9e;
+          --accent: #00d4ff;
+          --brand: #00d4ff;
+          --step-text: #f5f5f5;
+          --success: #22c55e;
+        }
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        margin: 0;
+        padding: 28px 32px;
+      }
+      h1 {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--success);
+        letter-spacing: 0.04em;
+        margin: 0 0 6px;
+      }
+      .sub {
+        font-size: 11px;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin: 0 0 20px;
+      }
+      p {
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--muted);
+        margin: 0 0 12px;
+      }
+      .highlight {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .brand {
+        color: var(--brand);
+        font-weight: 600;
+      }
+      .step {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin: 8px 0;
+        font-size: 13px;
+        color: var(--step-text);
+      }
+      .step span {
+        color: var(--accent);
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Installation Complete</h1>
+    <p class="sub">PulseControl Bridge is ready</p>
+    <p>
+      <span class="highlight">PulseControl Bridge</span> has been installed to
+      your <span class="highlight">/Applications</span> folder.
+    </p>
+    <div class="step">
+      <span>1.</span> Open <span>PulseControl Bridge</span> from your
+      Applications folder.
+    </div>
+    <div class="step">
+      <span>2.</span> Scan the QR code with <span>PulseControl Mobile</span> on
+      your iPhone or Android device.
+    </div>
+    <div class="step">
+      <span>3.</span> Move a fader — MIDI flows directly to your DAW on the
+      <span>PulseControl</span> virtual port.
+    </div>
+    <p style="margin-top: 20px; font-size: 11px; color: var(--muted);">
+      <span class="brand">PulseControl</span> is designed and built by
+      <span class="brand">Ernest Keyz Studios</span>.<br />
+      &copy; Ernest Keyz Studios. All rights reserved.
+    </p>
+  </body>
+</html>
+
+</html>

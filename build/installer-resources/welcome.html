@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="light dark" />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --text: #18181b;
+        --muted: #71717a;
+        --highlight: #18181b;
+        --accent: #0284c7;
+        --brand: #0284c7;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #080808;
+          --text: #9e9e9e;
+          --muted: #9e9e9e;
+          --highlight: #f5f5f5;
+          --accent: #00d4ff;
+          --brand: #00d4ff;
+        }
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        margin: 0;
+        padding: 28px 32px;
+      }
+      h1 {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 0.04em;
+        margin: 0 0 6px;
+      }
+      .sub {
+        font-size: 11px;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin: 0 0 20px;
+      }
+      p {
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--text);
+        margin: 0 0 12px;
+      }
+      .highlight {
+        color: var(--highlight);
+        font-weight: 600;
+      }
+      .brand {
+        color: var(--brand);
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>PulseControl Bridge</h1>
+    <p class="sub">Ernest Keyz Studios &nbsp;&bull;&nbsp; v1.0.0</p>
+    <p>
+      Welcome to <span class="highlight">PulseControl Bridge</span> &mdash; the
+      macOS companion app for
+      <span class="highlight">PulseControl Mobile</span>.
+    </p>
+    <p>
+      This installer will place
+      <span class="highlight">PulseControl Bridge.app</span> in your
+      <span class="highlight">/Applications</span> folder.
+    </p>
+    <p>
+      Once installed, launch the app and scan the QR code with
+      <span class="highlight">PulseControl Mobile</span> to start sending MIDI
+      from your phone to any DAW or hardware on your local network.
+    </p>
+    <p style="margin-top: 20px; font-size: 11px; color: var(--muted)">
+      <span class="brand">PulseControl</span> is designed and built by
+      <span class="brand">Ernest Keyz Studios</span>.<br />
+      &copy; Ernest Keyz Studios. All rights reserved.
+    </p>
+  </body>
+</html>
